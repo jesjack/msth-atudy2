@@ -1,0 +1,41 @@
+<header class="header">
+    <a href="#" class="header__logo"><ng-content></ng-content></a>
+
+    <!-- <ion-icon name="menu-outline" class="header__toggle" id="nav-toggle"></ion-icon> -->
+    <fa-icon [icon]="faBars" class="header__toggle" id="nav-toggle"></fa-icon>
+
+    <nav class="nav" id="nav-menu">
+        <div class="nav__content bd-grid">
+
+            <!-- <ion-icon name="close-outline" class="nav__close" id="nav-close"></ion-icon> -->
+            <fa-icon [icon]="faTimes" class="nav__close" id="nav-close"></fa-icon>
+
+            <div class="nav__perfil">
+                <div class="nav__img">
+                    <img src="assets/img/perfil.png" alt="">
+                </div>
+                
+                <div>
+                    <a href="#" class="nav__name"><ng-content></ng-content></a>
+                    <span class="nav__profesion">Web designer</span>
+                </div>
+            </div>
+
+            <div class="nav__menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a routerLink="home" class="nav__link active">Inicio</a></li>
+                    <li class="nav__item"><a href="#" class="nav__link">Estadísticas</a></li>
+                    <li class="nav__item"><a routerLink="profile" class="nav__link">Perfil</a></li>
+                    <li class="nav__item"><a routerLink="notes" class="nav__link">Notas</a></li>
+                    <li class="nav__item"><a routerLink="contact" class="nav__link">Contacto</a></li>
+                </ul>
+            </div>
+
+            <div class="nav__social">
+                <a href="#" class="nav__social-icon">
+                  <fa-icon [icon]="faGithub"></fa-icon>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>

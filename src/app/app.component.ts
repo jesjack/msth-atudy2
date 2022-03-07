@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { onSolve } from './problem.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'msth-atudy';
+  test(evt: onSolve) {
+    console.log(evt);
+    // evt.destroy();
+  }
 }

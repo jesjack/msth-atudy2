@@ -1,0 +1,41 @@
+<div class="inline-flex font-sans shadow rounded-lg">
+  <div class="grid grid-cols-1 gap-4 place-content-center bg-purple-800 rounded-l-lg text-white">
+    <div class="p-4 text-5xl">
+      <fa-icon [icon]="icon" class="t-shadow"></fa-icon>
+    </div>
+  </div>
+  <div class="bg-black w-1"></div>
+  <div class="p-4">
+    <ng-content></ng-content>
+    <p [mathjax]="problem" class="p-4"></p>
+    <div class="flex">
+      <input
+        *ngFor="let response of r_length; index as i"
+        [(ngModel)]="responses[i]"
+        (keydown)="onWrite()"
+        (keyup)="onWrite()"
+        class="
+          shadow appearance-none border
+          py-2 px-3 text-gray-700 leading-tight
+          focus:outline-none focus:shadow-outline
+          response-input
+        "
+        [ngClass]="{
+          'rounded-l-full': i === 0
+        }"
+        type="text"
+        >
+      <button
+        (click)="checkResponse()"
+        class="shadow bg-purple-800 hover:bg-purple-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded-r-full">
+        <fa-icon [icon]="faPaperPlane"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div class="bg-black w-1" [hidden]="!error"></div>
+  <div
+    class="bg-red-500 p-4 w-40 rounded-r-lg text-xs text-white"
+    [hidden]="!error">
+    <code>{{ error }}</code>
+  </div>
+</div>

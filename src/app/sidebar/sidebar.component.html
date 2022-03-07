@@ -1,0 +1,39 @@
+
+<div class="l-navbar" id="navbar">
+    <nav class="nav">
+        <div>
+            <div class="nav__brand">
+                <fa-icon [icon]="faBars" class="nav__toggle" id="sidenav-toggle"></fa-icon>
+                <a href="#" class="nav__logo"><ng-content></ng-content></a>
+            </div>
+            <div class="nav__list">
+                <a routerLink="welcome" class="nav__link" [ngClass]="{ 'active': true }">
+                    <fa-icon [icon]="faDoorOpen" class="nav__icon"></fa-icon>
+                    <span class="nav__name">Bienvenida</span>
+                </a>
+                <a href="#" class="nav__link">
+                    <fa-icon [icon]="faMountain" class="nav__icon"></fa-icon>
+                    <span class="nav__name">Campaña</span>
+                </a>
+
+                <div  class="nav__link collapse">
+                    <fa-icon [icon]="faObjectGroup" class="nav__icon"></fa-icon>
+                    <span class="nav__name">Categorías</span>
+
+                    <fa-icon [icon]="faChevronDown" class="collapse__link"></fa-icon>
+
+                    <ul class="collapse__menu">
+                        <a href="#" class="collapse__sublink">Primordial</a>
+                        <a href="#" class="collapse__sublink">Intermedio</a>
+                        <a href="#" class="collapse__sublink">Avanzado</a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" class="nav__link">
+            <fa-icon [icon]="faSignInAlt" class="nav__icon"></fa-icon>
+            <span class="nav__name">Iniciar sesión</span>
+        </a>
+    </nav>
+</div>

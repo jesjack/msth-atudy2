@@ -1,0 +1,20 @@
+<h1 class="text-2xl">{{ title }}</h1>
+<p>
+  {{ title }} es una aplicación de uso didáctico que le permitirá al usuario aprender a resolver problemas
+  simples matemáticos de una forma simple y divertida. Para poner en práctica tu conocimiento resuelve este
+  problema y obtén una respuesta correcta.
+</p>
+
+<app-problem class="my-4 inline-block"
+  [problem]="welcomeProblem.problem"
+  [solve]="welcomeProblem.solve"
+  dificulty="easy"
+  [correctSwal]="welcomeProblem.correctSwal"
+  (onCorrect)="welcomeProblem.onCorrect"
+>{{ welcomeProblem.html }}</app-problem>
+
+<p>
+  Al resolver el problema, lo normal es que el problema desaparezca o sea reemplazado por otro. Pero se te
+  darán puntos por cada problema resuelto permitiendote subir de nivel y a la vez mejorar tu capacidad
+  para resolver problemas.
+</p>
