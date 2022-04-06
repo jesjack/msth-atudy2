@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SweetAlertOptions } from 'sweetalert2';
 import { onSolve, onSolveFunction, solveFunction } from './problem.service';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,9 @@ export class CampaignService {
 
   public welcomeProblem: welcomeProblem;
 
-  constructor() {
+  constructor(
+    private profileService: ProfileService
+  ) {
     let n1 = Math.floor(Math.random() * 100);
     let n2 = Math.floor(Math.random() * 100);
     let n3 = Math.floor(Math.random() * 100);
@@ -25,7 +28,10 @@ export class CampaignService {
         timer: 0,
         showConfirmButton: true,
       },
-      onCorrect: (evt) => evt.destroy(),
+      onCorrect: (evt) => {
+        evt.destroy();
+        this.profileService.addXP(n1.toString().length + n2.toString().length + n3.toString().length);
+      },
     };
   }
 }

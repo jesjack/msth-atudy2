@@ -10,7 +10,7 @@
   [solve]="welcomeProblem.solve"
   dificulty="easy"
   [correctSwal]="welcomeProblem.correctSwal"
-  (onCorrect)="welcomeProblem.onCorrect"
+  (onCorrect)="welcomeProblem.onCorrect($event)"
 >{{ welcomeProblem.html }}</app-problem>
 
 <p>

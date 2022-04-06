@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import functionPlot from 'function-plot';
 import { CampaignService, welcomeProblem } from '../campaign.service';
 import { ProblemService } from '../problem.service';
 

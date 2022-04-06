@@ -16,6 +16,7 @@ import { NotesRouteComponent } from './notes-route/notes-route.component';
 import { ProfileRouteComponent } from './profile-route/profile-route.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { WelcomeRouteComponent } from './welcome-route/welcome-route.component';
+import { XpBarComponent } from './xp-bar/xp-bar.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { WelcomeRouteComponent } from './welcome-route/welcome-route.component';
     NotesRouteComponent,
     ProfileRouteComponent,
     WelcomeRouteComponent,
+    XpBarComponent,
   ],
   imports: [
     BrowserModule,
