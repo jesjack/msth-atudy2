@@ -7,7 +7,7 @@
                 <a href="#" class="nav__logo"><ng-content></ng-content></a>
             </div>
             <div class="nav__list">
-                <a routerLink="welcome" class="nav__link" [ngClass]="{ 'active': true }">
+                <a routerLink="welcome" class="nav__link" routerLinkActive="active">
                     <fa-icon [icon]="faDoorOpen" class="nav__icon"></fa-icon>
                     <span class="nav__name">Bienvenida</span>
                 </a>
@@ -31,9 +31,21 @@
             </div>
         </div>
 
-        <a href="#" class="nav__link">
-            <fa-icon [icon]="faSignInAlt" class="nav__icon"></fa-icon>
-            <span class="nav__name">Iniciar sesión</span>
-        </a>
+        <div
+        *ngIf="logged; then logout else login"
+        ></div>
+
+        <ng-template #login>
+            <a routerLink="login" class="nav__link" routerLinkActive="active">
+                <fa-icon [icon]="faSignInAlt" class="nav__icon"></fa-icon>
+                <span class="nav__name">Iniciar sesión</span>
+            </a>
+        </ng-template>
+        <ng-template #logout>
+            <a (click)="cerrarSesion()" class="nav__link">
+                <fa-icon [icon]="faSignOutAlt" class="nav__icon"></fa-icon>
+                <span class="nav__name">Cerrar sesión</span>
+            </a>
+        </ng-template>
     </nav>
 </div>

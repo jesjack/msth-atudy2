@@ -6,24 +6,40 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ProfileService {
-
+  
   static xpListener$ = new BehaviorSubject<number>(0);
   static xpObservable$ = ProfileService.xpListener$.asObservable();
-
+  
   addXP(xp: number): void {
     this.getProfile().addXP(xp);
     ProfileService.xpListener$.next(this.getProfile().getXP());
   }
-
+  
   constructor() {
     ProfileService.profile = ProfileService.profile || new this.Profile("invitado");
-  }
 
+    let { name, password } = JSON.parse(sessionStorage.getItem('profile') || 'false');
+    if (name && password)
+      this.login(name, password);
+  }
+  
   Profile = Profile;
   static profile: Profile;
-
+  
   getProfile(): Profile {
     return ProfileService.profile;
+  }
+
+  login(username: string, password: string) {
+    ProfileService.profile = new this.Profile(username, password);
+    ProfileService.xpListener$.next(this.getProfile().getXP());
+    sessionStorage.setItem('profile', JSON.stringify(ProfileService.profile));
+  }
+
+  logout() {
+    ProfileService.profile = new this.Profile("invitado");
+    ProfileService.xpListener$.next(this.getProfile().getXP());
+    sessionStorage.removeItem('profile');
   }
 
 }
@@ -69,16 +85,20 @@ export class Profile {
 
     for (let i = 0; i < localStorage.length; i++) {
       let bytes = AES.decrypt(localStorage.getItem(localStorage.key(i) || '') || '', this.password);
-      let decryptedData = JSON.parse(bytes.toString(enc.Utf8));
+      // check if the decrypted text has content
+      if (bytes.toString(enc.Utf8).length > 0) {
 
-      if (decryptedData.name === this.name) {
-        this.id = decryptedData.id;
-        this.xp = decryptedData.xp;
-        this.password = decryptedData.password;
-        break;
+        let decryptedData = JSON.parse(bytes.toString(enc.Utf8));
+  
+        if (decryptedData.name === this.name) {
+          this.id = decryptedData.id;
+          this.xp = decryptedData.xp;
+          this.password = decryptedData.password;
+          break;
+        }
+        
+        console.log(decryptedData);
       }
-      
-      console.log(decryptedData);
     }
 
     if (this.id === undefined) {

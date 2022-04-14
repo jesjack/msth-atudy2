@@ -17,6 +17,8 @@ import { ProfileRouteComponent } from './profile-route/profile-route.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { WelcomeRouteComponent } from './welcome-route/welcome-route.component';
 import { XpBarComponent } from './xp-bar/xp-bar.component';
+import { SignRouteComponent } from './sign-route/sign-route.component';
+import { CampaignRouteComponent } from './campaign-route/campaign-route.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { XpBarComponent } from './xp-bar/xp-bar.component';
     ProfileRouteComponent,
     WelcomeRouteComponent,
     XpBarComponent,
+    SignRouteComponent,
+    CampaignRouteComponent,
   ],
   imports: [
     BrowserModule,

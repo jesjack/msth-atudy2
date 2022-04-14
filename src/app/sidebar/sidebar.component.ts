@@ -1,15 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { faBars, faHome, faComment, faFolder, faChevronDown, faChartPie, faUserFriends, faCog, faSignOutAlt, faMountain, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { faDoorOpen, faObjectGroup } from '@fortawesome/free-solid-svg-icons';
+import { ProfileService } from '../profile.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.sass']
+  styleUrls: ['./sidebar.component.sass'],
+  providers: [ProfileService]
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  public logged: boolean;
+
+  public cerrarSesion() {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¡Se cerrará la sesión!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '¡Sí, cerrar sesión!',
+      heightAuto: false
+    }).then((result) => {
+      if (result.value) {
+        this.profileService.logout();
+        this.router.navigate(['/']);
+      }
+    });
+  }
+
+  constructor(
+    private profileService: ProfileService,
+    private router: Router
+  ) {
+    this.logged = this.profileService.getProfile().getName() !== 'invitado';
+    ProfileService.xpObservable$.subscribe(() => {
+      this.logged = this.profileService.getProfile().getName() !== 'invitado';
+    });
+  }
 
   ngOnInit(): void {
     /*===== EXPANDER MENU  =====*/ 

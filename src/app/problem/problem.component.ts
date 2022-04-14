@@ -7,7 +7,7 @@ import { faEgg, faDove, faDragon, faRobot, faSquareRootAlt, faMeteor, faInfinity
 // import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
-  selector: 'app-problem',
+  selector: 'problem',
   templateUrl: './problem.component.html',
   styleUrls: ['./problem.component.sass'],
   providers: [ProblemService]

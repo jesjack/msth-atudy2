@@ -5,6 +5,7 @@ import { NotesRouteComponent } from './notes-route/notes-route.component';
 import { ContactRouteComponent } from './contact-route/contact-route.component';
 import { ProfileRouteComponent } from './profile-route/profile-route.component';
 import { WelcomeRouteComponent } from './welcome-route/welcome-route.component';
+import { SignRouteComponent } from './sign-route/sign-route.component';
 
 let data = {
   'title': 'msth-atudy',
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactRouteComponent, data },
   { path: 'profile', component: ProfileRouteComponent, data },
   { path: 'welcome', component: WelcomeRouteComponent, data },
+  { path: 'login', component: SignRouteComponent, data }
 ];
 
 @NgModule({
