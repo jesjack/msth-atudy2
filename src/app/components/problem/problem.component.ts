@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
-import { ProblemService, solveFunction, onSolve } from '../problem.service';
+import { ProblemService, solveFunction, onSolve } from '../../problem.service';
 // Difficulties:
 import { faEgg, faDove, faDragon, faRobot, faSquareRootAlt, faMeteor, faInfinity, faQuestion, faExclamation  } from '@fortawesome/free-solid-svg-icons';
 // import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';

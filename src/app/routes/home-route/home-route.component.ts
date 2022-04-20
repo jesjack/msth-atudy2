@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CampaignService, welcomeProblem } from '../campaign.service';
-import { ProfileService } from '../profile.service';
+import { CampaignService, welcomeProblem } from '../../campaign.service';
+import { ProfileService } from '../../profile.service';
 
 @Component({
   selector: 'app-home-route',

@@ -42,9 +42,15 @@ export class ProfileService {
     sessionStorage.removeItem('profile');
   }
 
+  addProfile(encryptedProfile: string) {
+    // add profile to local storage with a new id
+    localStorage.setItem('profile: ' + Math.floor(Math.random() * 100000), encryptedProfile);
+  }
+
 }
 
 export class Profile {
+  
   id: number;
   name: string;
   xp: number;
@@ -83,22 +89,31 @@ export class Profile {
 
   public load(): void {
 
+    let prevI = -1;
+
     for (let i = 0; i < localStorage.length; i++) {
       let bytes = AES.decrypt(localStorage.getItem(localStorage.key(i) || '') || '', this.password);
       // check if the decrypted text has content
-      if (bytes.toString(enc.Utf8).length > 0) {
-
-        let decryptedData = JSON.parse(bytes.toString(enc.Utf8));
+      try {
+        if (bytes.toString(enc.Utf8).length > 0) {
   
-        if (decryptedData.name === this.name) {
-          this.id = decryptedData.id;
-          this.xp = decryptedData.xp;
-          this.password = decryptedData.password;
-          break;
+          let decryptedData = JSON.parse(bytes.toString(enc.Utf8));
+    
+          if (decryptedData.name === this.name) {
+            if (this.xp < decryptedData.xp || this.xp === 0) {
+              this.id = decryptedData.id;
+              this.xp = decryptedData.xp;
+              this.password = decryptedData.password;
+
+              localStorage.removeItem(localStorage.key(prevI) || '');
+              prevI = i;
+              
+            }
+          }
+          
+          // console.log(decryptedData);
         }
-        
-        console.log(decryptedData);
-      }
+      } catch(err) {}
     }
 
     if (this.id === undefined) {
@@ -120,6 +135,24 @@ export class Profile {
     } else
       return null;
   }
+
+  private encryptProfile(): string {
+    return AES.encrypt(JSON.stringify(this), this.password).toString();
+  }
+
+  getQrCode(): string {
+    // http o https://${ip:port}/login/${encrypted-profile} (saber el protocolo antes de generar el qr)
+    let http_or_https = window.location.protocol;
+    let ip_or_domain = window.location.hostname;
+    let port = window.location.port;
+    let profile = encodeURIComponent(this.encryptProfile());
+    return `${http_or_https}//${ip_or_domain}${port ? ':' + port : ''}/login/${profile}`;
+    // return `${http_or_https}//${dominio}/login/${profile}`;
+    // return `https://${window.location.host}/login/${this.encryptProfile()}`;
+    // return `https://${window.location.host}/login/${this.encryptProfile()}`;
+    // return `${window.location.host}/login/${this.encryptProfile()}`;
+  }
+  
 }
 
 interface profile {

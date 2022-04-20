@@ -3,5 +3,8 @@
   <div class="profile">
     <app-xp-bar></app-xp-bar>
     <h1>{{ name }}</h1>
+    <a [href]="qrCode">
+      <qrcode [qrdata]="qrCode" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+    </a>
   </div>
 </div>

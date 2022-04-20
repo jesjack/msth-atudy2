@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faBars, faHome, faComment, faFolder, faChevronDown, faChartPie, faUserFriends, faCog, faSignOutAlt, faMountain, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { faDoorOpen, faObjectGroup } from '@fortawesome/free-solid-svg-icons';
-import { ProfileService } from '../profile.service';
+import { ProfileService } from '../../profile.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 

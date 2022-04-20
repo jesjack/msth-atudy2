@@ -1,0 +1,20 @@
+<h1>Bienvenido a la campaña</h1>
+
+<!-- 2 columns grid (1 column in movile) -->
+<div class="grid overflow-hidden lg:grid-cols-2 md:grid-cols-1 gap-2">
+  <problem
+    class="box"
+    *ngFor="let problem of problems"
+    [problem]="problem.problem"
+    [solve]="problem.solve"
+    [dificulty]="problem.dificulty"
+    [correctSwal]="problem.correctSwal"
+    [incorrectSwal]="problem.incorrectSwal"
+    (onCorrect)="problem.onCorrect($event)"
+    (onIncorrect)="problem.onIncorrect($event)"
+    class="my-4"
+  >{{ problem.html }}</problem>
+</div>
+
+<!-- <ngx-math-function-plotter functionInput="sqr(10-x^2)" [maxDisplayValue]="10" [width]="300" [height]="300">
+</ngx-math-function-plotter> -->

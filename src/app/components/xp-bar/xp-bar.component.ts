@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProfileService } from '../profile.service';
+import { ProfileService } from '../../profile.service';
 
 @Component({
   selector: 'app-xp-bar',
@@ -30,7 +30,8 @@ export class XpBarComponent implements OnInit {
   }
 
   updateProgress(): void {
-    let xp_sqrt = Math.sqrt(this.profileService.getProfile().getXP());
+    // let xp_sqrt = Math.sqrt(this.profileService.getProfile().getXP());
+    let xp_sqrt = Math.log2(this.profileService.getProfile().getXP() + 1);
     this.lvl = Math.floor(xp_sqrt);
     this.progress = ((xp_sqrt - this.lvl) * 100);
   }

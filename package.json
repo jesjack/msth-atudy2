@@ -25,6 +25,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@sweetalert2/ngx-sweetalert2": "^10.0.0",
     "@types/crypto-js": "^4.1.1",
+    "angularx-qrcode": "^13.0.14",
     "crypto-js": "^4.1.1",
     "function-plot": "^1.22.8",
     "mathjax-angular": "^1.4.2",

@@ -2,25 +2,27 @@ import { Injectable } from '@angular/core';
 import { SweetAlertOptions } from 'sweetalert2';
 import { onSolve, onSolveFunction, solveFunction } from './problem.service';
 import { ProfileService } from './profile.service';
+import { mayor } from './problems/mayor';
+import { sis_ec } from './problems/sistema_ecuaciones';
+import { integral } from './problems/integral';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CampaignService {
+  getProblems(): problem[] {
+    return this.problems;
+  }
 
   public welcomeProblem: welcomeProblem;
+  public problems: problem[];
 
   constructor(
     private profileService: ProfileService
   ) {
-    let n1 = Math.floor(Math.random() * 100);
-    let n2 = Math.floor(Math.random() * 100);
-    let n3 = Math.floor(Math.random() * 100);
 
     this.welcomeProblem = {
-      html: '¿Cuál de los siguientes números es mayor?',
-      problem: `De entre los números $${n1}, ${n2}$ y $${n3}$ el mayor es \${r0}$.`,
-      solve: (responses: string[]) => parseInt(responses[0]) == Math.max(n1, n2, n3),
+      ...mayor(this.profileService.getProfile().getXP()),
       correctSwal: {
         title: '¡Muy bien!',
         text: '¡Has respondido la interrogante correctamente! ¿Ves qué fácil es?',
@@ -28,11 +30,58 @@ export class CampaignService {
         timer: 0,
         showConfirmButton: true,
       },
-      onCorrect: (evt) => {
-        evt.destroy();
-        this.profileService.addXP(n1.toString().length + n2.toString().length + n3.toString().length);
-      },
     };
+
+    let incorrectSwal: SweetAlertOptions = {
+      title: '¡Ups!',
+      text: '¡Has respondido incorrectamente!',
+      confirmButtonText: '¡Vuelve a intentarlo!',
+      timer: 0,
+      showConfirmButton: true,
+    };
+
+    let correctSwal: SweetAlertOptions = {
+      title: '¡Muy bien!',
+      text: '¡Has respondido la interrogante correctamente! ¿Ves qué fácil es?',
+      confirmButtonText: '¡Asi es!',
+      timer: 0,
+      showConfirmButton: true,
+    };
+
+    // Inventar distintos problemas
+    this.problems = [];
+    this.problems.push({
+      ...this.welcomeProblem,
+      incorrectSwal,
+      correctSwal: {
+        ...correctSwal,
+        willClose: () => document.location.reload()
+      },
+      onIncorrect: (evt) => {},
+      dificulty: 'easy'
+    });
+    
+    this.problems.push({
+      ...sis_ec(this.profileService.getProfile().getXP()),
+      correctSwal: {
+        ...correctSwal,
+        willClose: () => document.location.reload()
+      },
+      incorrectSwal,
+      onIncorrect: (evt) => {}
+    });
+
+    this.problems.push({
+      ...integral(this.profileService.getProfile().getXP()),
+      correctSwal: {
+        ...correctSwal,
+        willClose: () => document.location.reload()
+      },
+      incorrectSwal,
+      onIncorrect: (evt) => {}
+    });
+
+    
   }
 }
 
@@ -42,4 +91,15 @@ export interface welcomeProblem {
   solve: solveFunction,
   correctSwal: SweetAlertOptions,
   onCorrect: onSolveFunction
+}
+
+export interface problem {
+  html: string;
+  problem: string,
+  solve: solveFunction,
+  correctSwal: SweetAlertOptions,
+  incorrectSwal: SweetAlertOptions,
+  onCorrect: onSolveFunction,
+  onIncorrect: onSolveFunction,
+  dificulty: string
 }
